@@ -1,0 +1,42 @@
+
+use_backbone_finetuning: false 
+
+
+
+(unfreeze_backbone_at_epoch=10, lambda_func=<function multiplicative>, backbone_initial_ratio_lr=0.1, backbone_initial_lr=None, should_align=True, initial_denom_lr=10.0, train_bn=True, verbose=False, round=12)
+# ✔  ✔
+# 1. Go through backbonefinetuning docs once again
+# 2. Look at basefinetuning callback to implement your algos
+# 3. 
+
+
+
+# finetune a backbone model based on a learning rate user-defined scheduling 
+# When the backbone learning rate reaches the current model learning rate and should_align is set to True, it will align with it for the rest of the training
+# TODO: looking at the docs it looks like backbone lr is higher than fina
+backbone_finetuning: 
+  _target_: pytorch_lightning.callbacks.BackboneFinetuning
+  unfreeze_backbone_at_epoch: 10 # backbone is freezed till this epoch
+  # lambda_func: lambda epoch: return 2 ## by default multiply lr by 2 at each epoch
+  should_align: true #align the current lr with backbone lr
+  verbose: true # show backbone lr and model lr 
+
+
+# monitor a metric and stop training when it stops improving
+early_stopping:
+  _target_: pytorch_lightning.callbacks.EarlyStopping
+  monitor: "val/acc" # name of the logged metric which determines when model is improving
+  patience: 100 # how many epochs of not improving until training stops
+  mode: "max" # can be "max" or "min"
+  min_delta: 0 # minimum change in the monitored metric needed to qualify as an improvement
+
+
+model_checkpoint:
+  _target_: pytorch_lightning.callbacks.ModelCheckpoint
+  monitor: "val/acc" # name of the logged metric which determines when model is improving
+  save_top_k: 1 # save k best models (determined by above metric)
+  save_last: True # additionaly always save model from last epoch
+  mode: "max" # can be "max" or "min"
+  verbose: False
+  dirpath: "checkpoints/"
+  filename: "{epoch:02d}"
