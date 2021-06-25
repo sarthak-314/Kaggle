@@ -37,7 +37,7 @@ from src.data.comp.config import (
     # Paths for the dataset
     RAW_DATASET_PATH, INTERIM_DATASET_PATH, PROCESSED_DATASET_PATH, 
 )
-import src.data.comp.preprocess_raw_dataset
+import src.data.comp.preprocess
 
 # Main functions for feature engineering
 def add_file_path(df, raw_dataset_path=RAW_DATASET_PATH): 
@@ -73,7 +73,7 @@ def feature_engineering_pipeline(df, df_type='train', raw_dataset_path=RAW_DATAS
     """
     # Test specific stuff
     if df_type == 'test': 
-        df = src.data.comp.preprocess_raw_dataset.read_raw_test(input_folder=raw_dataset_path)
+        df = src.data.comp.preprocess.read_raw_test(input_folder=raw_dataset_path)
     else: # Train specific stuff
         pass
     df = add_file_path(df, raw_dataset_path)

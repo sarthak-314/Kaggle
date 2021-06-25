@@ -20,7 +20,7 @@ from src.data.comp.config import (
     # Paths for the dataset
     RAW_DATASET_PATH, INTERIM_DATASET_PATH, PROCESSED_DATASET_PATH, 
 )
-import src.data.comp.preprocess_raw_dataset
+import src.data.comp.preprocess
 import src.data.comp.build_features
 
 def main(input_folder=PROCESSED_DATASET_PATH, fold=0, debug_percentage='full'): 
@@ -55,7 +55,7 @@ def main(input_folder=PROCESSED_DATASET_PATH, fold=0, debug_percentage='full'):
 
 def build_test(raw_dataset_path=RAW_DATASET_PATH): 
     # Read raw test and then add features to it
-    test = src.data.comp.preprocess_raw_dataset.read_raw_test(raw_dataset_path)
+    test = src.data.comp.preprocess.read_raw_test(raw_dataset_path)
     test = src.data.comp.build_features.feature_engineering_pipeline(df=test, df_type='test')
     return test
 
