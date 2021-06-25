@@ -1,9 +1,12 @@
 """
 Startup script for Jupyter notebooks. It's a good way to load all the libraries, extensions and variables fast
 
-KAGGLE: 
-
-
+KAGGLE BOILERPLATE:
+from kaggle_secrets import UserSecretsClient
+!git clone -q {UserSecretsClient().get_secret("git")}
+%cd /kaggle/working/Kaggle
+!git pull
+%run /kaggle/working/Kaggle/src/startup.py 
 """
 from dataclasses import dataclass, asdict
 from distutils.dir_util import copy_tree
@@ -66,3 +69,4 @@ valid = pd.read_csv(PATHS['dataframes'] / 'fold_0' / 'full' / 'valid.csv')
 # Add module to path and import it
 sys.path.append('/kaggle/working/Kaggle/src')
 import src
+COMP_NAME = src.utils.COMP_NAME
