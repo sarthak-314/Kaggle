@@ -1,3 +1,9 @@
+function lazygit() {
+    git add .
+    git commit -a -m "$1"
+    git push
+}
+
 conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 https://www.kaggle.com/gzuidhof/full-preprocessing-tutorial
 https://github.com/albumentations-team/autoalbument-benchmarks/tree/main/conf for a good hydra architecture

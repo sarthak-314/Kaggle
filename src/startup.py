@@ -42,8 +42,12 @@ except:
 # Add PATHS, pip_install
 COMP_NAME = 'siim-covid19-detection'
 KAGGLE_PATHS = {
-    'kaggle': Path('/kaggle'), 
     'working': Path('/kaggle/working'), 
     'input': Path('/kaggle/input'), 
     'comp': Path(f'/kaggle/input/{COMP_NAME}'), 
+    'kaggle': Path('/kaggle/working/Kaggle'),
+    'dataframes': Path('/kaggle/working/Kaggle/dataframes'),  
 }
+
+train = pd.read_csv(KAGGLE_PATHS['dataframes'] / 'fold_0' / 'full' / 'train.csv')
+valid = pd.read_csv(KAGGLE_PATHS['dataframes'] / 'fold_0' / 'full' / 'valid.csv')
