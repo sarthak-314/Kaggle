@@ -35,3 +35,6 @@ MANIFEST
 
 # Environment
 .env
+
+# VS Code
+.vscode

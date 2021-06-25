@@ -40,3 +40,10 @@ except:
     print('could not load ipython magic extensions')
 
 # Add PATHS, pip_install
+COMP_NAME = 'siim-covid19-detection'
+KAGGLE_PATHS = {
+    'kaggle': Path('/kaggle'), 
+    'working': Path('/kaggle/working'), 
+    'input': Path('/kaggle/input'), 
+    'comp': Path(f'/kaggle/input/{COMP_NAME}'), 
+}
