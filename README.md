@@ -8,3 +8,5 @@ Download -> Make datasets -> Feature Engineering -> Build Datasets -> TorchDatas
 Try to iterate fast and make a no aug - single backbone baseline within a day. Try to reach silver with this
 
 ## Basic aug + single backbone baseline
+
+## Notebooks

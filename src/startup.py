@@ -57,6 +57,11 @@ if 'KAGGLE_KERNEL_RUN_TYPE' in os.environ:
         'kaggle': Path('/kaggle/working/Kaggle'),
         'dataframes': Path('/kaggle/working/Kaggle/dataframes'), 
     }
+    # Add module to path and import it
+    sys.path.append('/kaggle/working/Kaggle/src')
+    sys.path.append('/kaggle/working/Kaggle')
+    os.chdir(PATHS['kaggle'])
+    
 else: 
     PATHS = {
         'dataframes': Path('C:\\Users\\sarth\\Desktop\\kaggle-v2\\dataframes')
@@ -66,8 +71,7 @@ else:
 train = pd.read_csv(PATHS['dataframes'] / 'fold_0' / 'full' / 'train.csv')
 valid = pd.read_csv(PATHS['dataframes'] / 'fold_0' / 'full' / 'valid.csv')
 
-# Add module to path and import it
-sys.path.append('/kaggle/working/Kaggle/src')
+
 import src
 import src.utils
 COMP_NAME = src.utils.COMP_NAME
