@@ -1,0 +1,50 @@
+_target_: pytorch_lightning.Trainer
+# TODO: Look at accelerator
+
+# AUTO TUNE
+# ---------
+# Find the largest batch size that will fit in memory
+auto_scale_batch_size: 'binsearch'
+# You have to call trainer.tune(model) after this
+# Run learning rate finder
+auto_lr_find: true
+
+
+# GRADIENTS
+# --------- 
+# use track_grad_norm to keep track of vanishing and exploding gradients
+# if you do find some gradients exploding, use gradient_clip_val to keep them from exploding to inf
+gradient_clip_val: 0.0 # You need to fine tune it
+track_grad_norm: 2 # track l2 norm
+gradient_clip_algorithm: 'value' # put 'norm' to clip by norm (better?)
+# If the data is so large that it cannot fit on a single batch 
+# Ex. You can only fit 4 batches in memory, but need 16 for model to work properly
+# you can also pass a dict {5:3, 10:20} accumulation = 3 for 5-10, 20 for 10_ epochs
+accumulate_grad_batches: 1
+# TODO: Learn more about tracking L2, L1 grad norm
+
+
+# -- Limiting the time & resources --
+# max_epochs, min_epochs, max_time, 
+max_time: { 'hours': 8 }
+max_epochs: 1000
+min_epochs: 1
+max_steps: null
+min_steps: null
+
+gpus: -1 # train on all gpus
+num_sanity_val_steps: 2 # run 2 batches of validation before starting training
+reload_dataloaders_every_epoch: true # reload dataloaders every epoch
+terminate_on_nan: true # terminate training if any of the parameters or losses is NaN
+
+# FREE PERF
+stochastic_weight_avg: true # free performance
+precision: 16 # 2 x speed up on training and less memory
+# Use this if input size is constant for the system(i'm assuming LitModel)
+benchmark: true
+# looks for some algos according to the hardware
+
+# TODO: See what weight summary gives 
+weights_summary: 'full' # full gives summary of all modules and submodules
+# after you know what this does, maybe change to 'top' to get summary for only top level modules
+profiler: 'advanced' # les see what this does

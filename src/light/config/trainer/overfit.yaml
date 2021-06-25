@@ -1,0 +1,3 @@
+overfit_batches: 0.01 # use only 1% of the train set for training, use the rest for validation
+# overfit_batches: 10 ## overfit on the same 10 batches
+

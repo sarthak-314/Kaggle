@@ -1,0 +1,59 @@
+# Finetune a backbone by your defined learning rate
+# this will run till the learning rates of backbone aligns with the rest of the model
+backbone_finetuning: 
+  _target_: pytorch_lightning.callbacks.BackboneFinetuning
+  unfreeze_backbone_at_epoch: 10 # backbone is freezed till this epoch
+  # lambda_func is multipliply lr after each epoch by 2 
+  should_align: true # align the learning rates 
+  verbose: true # display the learning rates
+# TODO: looking at the docs it looks like backbone lr is higher than fina
+# TODO: is this the best way for finetuning a backbone?
+
+
+# Stop model training when metric stops improving
+early_stopping: 
+  _target_: pytorch_lightning.callbacks.EarlyStopping
+  patience: 5 # wait for max 5 epochs for the metric to improve
+  monitor: 'val/acc' # validation metric - make sure to log it 
+  mode: 'max' # should the validation metric be up or down
+
+# Log learning rate for learning rate schedulers during training
+learning_rate_montior: 
+  _target_: pytorch_lightning.callbacks.LearningRateMonitor
+  logging_interval: 'step' # log the learning rate at each step 
+  log_momentum: true # for moment based optimizers
+
+# Save the model every epoch if the score increases
+model_checkpoint:
+  _target_: pytorch_lightning.callbacks.ModelCheckpoint
+  dirpath: "checkpoints/" # save all the models here
+  filename: "epoch_{epoch:02d}-loss_{val/loss:.4f}-acc_{val/acc:.4f}"
+  save_top_k: 5 # save top 5 models
+  save_last: True # always save last
+  monitor: "val/acc" 
+  mode: "max" 
+
+#TODO: Learn more about model pruning and it's callback
+
+#TODO: Learn more about stochastic weight averaging and it's parameters
+
+# Print table with metrics in every epoch end
+print_table_metrics: 
+  _target_: pl_bolts.callbacks.printing.PrintTableMetricsCallback
+
+
+# BETA: Beta callbacks I might remove later
+
+# Create histogram for each batch input in training step 
+training_data_monitor: 
+  _target_: pl_bolts.callbacks.TrainingDataMonitor
+  log_every_n_steps: 25
+
+# Histograms of data passing through a .forward pass
+model_data_monitor: 
+  _target_: pl_bolts.callbacks.ModuleDataMonitor
+
+# Lightweight verification callback
+batch_gradient_verification: 
+  _target_: pl_bolts.callbacks.BatchGradientVerificationCallback
+

@@ -1,3 +1,9 @@
+conda install -y pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
+https://www.kaggle.com/gzuidhof/full-preprocessing-tutorial
+https://github.com/albumentations-team/autoalbument-benchmarks/tree/main/conf for a good hydra architecture
+
+just installed pytorch for now coz it's slow
+
 - go though hydra, lightning callbacks & trainer very carefully 
 - use OmegaConf and access config through dot notation OmegaConf.load('config.yaml')
 - load the aug config and run config in the jupyter notebook
@@ -8,7 +14,7 @@ CREATIVE MODE
 
 MODERATELY ZONED IN MODE
 - go through hydra docs, lightning callbacks & trainer
-
+- auto augment paper and related
 
 
 What can be changed
@@ -75,3 +81,6 @@ Torch
 - see black python formatting package
 - Look at https://github.com/TezRomacH/python-package-template to level up python structure
 """
+
+TODOS: 
+- Find how to best structure a python pakcage and a project and jupyternotebooks with i

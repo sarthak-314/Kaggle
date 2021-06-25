@@ -14,6 +14,5 @@ def build_sub_df(df):
 
 from pathlib import Path 
 
-COMP_NAME = 'siim-covid19-detection'
 SRC_PACKAGE_PATH = Path('C:\\Users\\sarth\\Desktop\\kaggle-v2\\src')
 INPUT_PATH = Path('C:\\Users\\sarth\\Desktop\\kaggle-v2')
