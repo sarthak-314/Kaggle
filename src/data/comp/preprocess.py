@@ -46,7 +46,6 @@ import os
 
 import src
 import src.data.utils
-import src.comp.utils
 
 from src.data.comp.config import (
     # Competition specific config
