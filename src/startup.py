@@ -69,4 +69,5 @@ valid = pd.read_csv(PATHS['dataframes'] / 'fold_0' / 'full' / 'valid.csv')
 # Add module to path and import it
 sys.path.append('/kaggle/working/Kaggle/src')
 import src
+import src.utils
 COMP_NAME = src.utils.COMP_NAME
