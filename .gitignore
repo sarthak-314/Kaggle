@@ -1,6 +1,6 @@
 
 # Raw Data
-data/
+/data/
 
 # Pickle / CSV dataframes
 *.csv

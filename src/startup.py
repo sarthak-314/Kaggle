@@ -44,9 +44,10 @@ COMP_NAME = 'siim-covid19-detection'
 KAGGLE_PATHS = {
     'working': Path('/kaggle/working'), 
     'input': Path('/kaggle/input'), 
+    'tmp': Path('/kaggle/tmp'), 
     'comp': Path(f'/kaggle/input/{COMP_NAME}'), 
     'kaggle': Path('/kaggle/working/Kaggle'),
-    'dataframes': Path('/kaggle/working/Kaggle/dataframes'),  
+    'dataframes': Path('/kaggle/working/Kaggle/dataframes'), 
 }
 
 train = pd.read_csv(KAGGLE_PATHS['dataframes'] / 'fold_0' / 'full' / 'train.csv')
