@@ -1,5 +1,9 @@
 """
 Startup script for Jupyter notebooks. It's a good way to load all the libraries, extensions and variables fast
+
+KAGGLE: 
+
+
 """
 from dataclasses import dataclass, asdict
 from distutils.dir_util import copy_tree
@@ -41,14 +45,24 @@ except:
 
 # Add PATHS, pip_install
 COMP_NAME = 'siim-covid19-detection'
-KAGGLE_PATHS = {
-    'working': Path('/kaggle/working'), 
-    'input': Path('/kaggle/input'), 
-    'tmp': Path('/kaggle/tmp'), 
-    'comp': Path(f'/kaggle/input/{COMP_NAME}'), 
-    'kaggle': Path('/kaggle/working/Kaggle'),
-    'dataframes': Path('/kaggle/working/Kaggle/dataframes'), 
-}
+if 'KAGGLE_KERNEL_RUN_TYPE' in os.environ: 
+    PATHS = {
+        'working': Path('/kaggle/working'), 
+        'input': Path('/kaggle/input'), 
+        'tmp': Path('/kaggle/tmp'), 
+        'comp': Path(f'/kaggle/input/{COMP_NAME}'), 
+        'kaggle': Path('/kaggle/working/Kaggle'),
+        'dataframes': Path('/kaggle/working/Kaggle/dataframes'), 
+    }
+else: 
+    PATHS = {
+        'dataframes': Path('C:\\Users\\sarth\\Desktop\\kaggle-v2\\dataframes')
+    }    
 
-train = pd.read_csv(KAGGLE_PATHS['dataframes'] / 'fold_0' / 'full' / 'train.csv')
-valid = pd.read_csv(KAGGLE_PATHS['dataframes'] / 'fold_0' / 'full' / 'valid.csv')
+# Add dataframes    
+train = pd.read_csv(PATHS['dataframes'] / 'fold_0' / 'full' / 'train.csv')
+valid = pd.read_csv(PATHS['dataframes'] / 'fold_0' / 'full' / 'valid.csv')
+
+# Add module to path and import it
+sys.path.append('/kaggle/working/Kaggle/src')
+import src
