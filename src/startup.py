@@ -70,3 +70,4 @@ else:
 train = pd.read_csv(PATHS['dataframes'] / 'fold_0' / 'full' / 'train.csv')
 valid = pd.read_csv(PATHS['dataframes'] / 'fold_0' / 'full' / 'valid.csv')
 
+import src 
